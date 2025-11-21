@@ -1,9 +1,9 @@
-import React from 'react'
-
-const Footer = () => {
+export const Footer = () => {
   return (
-    <div>Footer</div>
-  )
+    <footer className="border-t py-6">
+        <p className="text-sm text-muted-foreground text-center">
+          © 2025 Serenity AI. All rights reserved.
+        </p>
+    </footer>
+  );
 }
-
-export default Footer

@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import Header from "@/components/Header";
 import "./globals.css";
 import { Providers } from "@/components/providers";
-import Footer from "@/components/Footer";
+import { Footer } from "@/components/Footer";
 import { Toaster } from "@/components/ui/sonner";
 
 
@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${inter.variable} antialiased`}
       >

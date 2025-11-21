@@ -41,102 +41,357 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --animate-ripple: ripple var(--duration, 2s) ease calc(var(--i, 0)*.2s) infinite;
 }
 
-:root {
-   /* Calming light theme colors */
-    --background: 180 20% 99%;
-    --foreground: 200 8% 24%;
+@keyframes ripple {
 
-    --card: 180 20% 99%;
-    --card-foreground: 200 8% 24%;
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
 
-    --popover: 180 20% 99%;
-    --popover-foreground: 200 8% 24%;
-
-    /* Soft sage green as primary */
-    --primary: 150 30% 60%;
-    --primary-foreground: 150 40% 16%;
-
-    /* Gentle lavender as secondary */
-    --secondary: 250 20% 96%;
-    --secondary-foreground: 250 10% 30%;
-
-    /* Muted tones */
-    --muted: 210 20% 96%;
-    --muted-foreground: 215 16% 45%;
-
-    /* Soft accent */
-    --accent: 180 25% 95%;
-    --accent-foreground: 200 8% 24%;
-
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 210 20% 98%;
-
-    --border: 200 10% 90%;
-    --input: 200 10% 90%;
-    --ring: 150 30% 60%;
-
-    --radius: 0.75rem;
-
-    --sidebar: hsl(0 0% 98%);
-
-    --sidebar-foreground: hsl(240 5.3% 26.1%);
-
-    --sidebar-primary: hsl(240 5.9% 10%);
-
-    --sidebar-primary-foreground: hsl(0 0% 98%);
-
-    --sidebar-accent: hsl(240 4.8% 95.9%);
-
-    --sidebar-accent-foreground: hsl(240 5.9% 10%);
-
-    --sidebar-border: hsl(220 13% 91%);
-
-    --sidebar-ring: hsl(217.2 91.2% 59.8%);
+  50% {
+    transform: translate(-50%, -50%) scale(0.9);
+  }
 }
 
-.dark {
-   /* Soothing dark theme colors */
-    --background: 200 50% 3%;
-    --foreground: 210 20% 98%;
+:root, [data-theme="forest"] {
+  /* Calming light theme colors (HSL converted to Hex) */
+  --background: #FCFDFD;
+  --foreground: #383F42;
 
-    --card: 200 50% 3%;
-    --card-foreground: 210 20% 98%;
+  --card: #FCFDFD;
+  --card-foreground: #383F42;
 
-    --popover: 200 50% 3%;
-    --popover-foreground: 210 20% 98%;
+  --popover: #FCFDFD;
+  --popover-foreground: #383F42;
 
-    /* Soft sage in dark mode */
-    --primary: 150 30% 70%;
-    --primary-foreground: 150 40% 16%;
+  /* Soft sage green as primary */
+  --primary: #7AB899;
+  --primary-foreground: #183929;
 
-    /* Gentle purple in dark mode */
-    --secondary: 250 20% 20%;
-    --secondary-foreground: 210 20% 98%;
+  /* Gentle lavender as secondary */
+  --secondary: #F3F3F7;
+  --secondary-foreground: #474554;
 
-    /* Muted dark tones */
-    --muted: 200 50% 10%;
-    --muted-foreground: 210 20% 70%;
+  /* Muted tones */
+  --muted: #F3F5F7;
+  --muted-foreground: #607085;
 
-    /* Soft dark accent */
-    --accent: 200 50% 10%;
-    --accent-foreground: 210 20% 98%;
+  /* Soft accent */
+  --accent: #EFF5F5;
+  --accent-foreground: #383F42;
 
-    --destructive: 0 62% 30%;
-    --destructive-foreground: 210 20% 98%;
+  --destructive: #EF4343;
+  --destructive-foreground: #F9FAFB;
 
-    --border: 200 50% 10%;
-    --input: 200 50% 10%;
-    --ring: 150 30% 70%;
-    --sidebar: hsl(240 5.9% 10%);
-    --sidebar-foreground: hsl(240 4.8% 95.9%);
-    --sidebar-primary: hsl(224.3 76.3% 48%);
-    --sidebar-primary-foreground: hsl(0 0% 100%);
-    --sidebar-accent: hsl(240 3.7% 15.9%);
-    --sidebar-accent-foreground: hsl(240 4.8% 95.9%);
-    --sidebar-border: hsl(240 3.7% 15.9%);
-    --sidebar-ring: hsl(217.2 91.2% 59.8%);
+  --border: #E3E6E8;
+  --input: #E3E6E8;
+  --ring: #7AB899;
+
+  /* Sidebar Colors */
+  --sidebar: #FAFAFA;
+  --sidebar-foreground: #3F3F46;
+  --sidebar-primary: #18181B;
+  --sidebar-primary-foreground: #FAFAFA;
+  --sidebar-accent: #F4F4F5;
+  --sidebar-accent-foreground: #18181B;
+  --sidebar-border: #E5E7EB;
+  --sidebar-ring: #3B82F6;
+
+  --radius: 0.75rem;
+}
+
+.dark, [data-theme="forest"][data-mode="dark"] {
+  /* Soothing dark theme colors (HSL converted to Hex) */
+  --background: #04090B;
+  --foreground: #F9FAFB;
+
+  --card: #04090B;
+  --card-foreground: #F9FAFB;
+
+  --popover: #04090B;
+  --popover-foreground: #F9FAFB;
+
+  /* Soft sage in dark mode */
+  --primary: #9CC9B2;
+  --primary-foreground: #183929;
+
+  /* Gentle purple in dark mode */
+  --secondary: #2C293D;
+  --secondary-foreground: #F9FAFB;
+
+  /* Muted dark tones */
+  --muted: #0D1E26;
+  --muted-foreground: #A3B2C2;
+
+  /* Soft dark accent */
+  --accent: #0D1E26;
+  --accent-foreground: #F9FAFB;
+
+  --destructive: #7C1D1D;
+  --destructive-foreground: #F9FAFB;
+
+  --border: #0D1E26;
+  --input: #0D1E26;
+  --ring: #9CC9B2;
+
+  /* Sidebar Colors */
+  --sidebar: #18181B;
+  --sidebar-foreground: #F4F4F5;
+  --sidebar-primary: #1D4ED8;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #27272A;
+  --sidebar-accent-foreground: #F4F4F5;
+  --sidebar-border: #27272A;
+  --sidebar-ring: #3B82F6;
+}
+
+/* Additional calming color palettes for mental peace */
+
+/* Forest Serenity Palette - Earthy greens and browns (now the default) */
+[data-theme="forest"] {
+  --background: #FCFDFD;
+  --foreground: #383F42;
+  --card: #FCFDFD;
+  --card-foreground: #383F42;
+  --popover: #FCFDFD;
+  --popover-foreground: #383F42;
+  --primary: #7AB899;
+  --primary-foreground: #183929;
+  --secondary: #F3F3F7;
+  --secondary-foreground: #474554;
+  --muted: #F3F5F7;
+  --muted-foreground: #607085;
+  --accent: #EFF5F5;
+  --accent-foreground: #383F42;
+  --destructive: #EF4343;
+  --destructive-foreground: #F9FAFB;
+  --border: #E3E6E8;
+  --input: #E3E6E8;
+  --ring: #7AB899;
+  --sidebar: #FAFAFA;
+  --sidebar-foreground: #3F3F46;
+  --sidebar-primary: #18181B;
+  --sidebar-primary-foreground: #FAFAFA;
+  --sidebar-accent: #F4F4F5;
+  --sidebar-accent-foreground: #18181B;
+  --sidebar-border: #E5E7EB;
+  --sidebar-ring: #3B82F6;
+}
+
+[data-theme="forest"][data-mode="dark"] {
+  --background: #04090B;
+  --foreground: #F9FAFB;
+  --card: #04090B;
+  --card-foreground: #F9FAFB;
+  --popover: #04090B;
+  --popover-foreground: #F9FAFB;
+  --primary: #9CC9B2;
+  --primary-foreground: #183929;
+  --secondary: #2C293D;
+  --secondary-foreground: #F9FAFB;
+  --muted: #0D1E26;
+  --muted-foreground: #A3B2C2;
+  --accent: #0D1E26;
+  --accent-foreground: #F9FAFB;
+  --destructive: #7C1D1D;
+  --destructive-foreground: #F9FAFB;
+  --border: #0D1E26;
+  --input: #0D1E26;
+  --ring: #9CC9B2;
+  --sidebar: #18181B;
+  --sidebar-foreground: #F4F4F5;
+  --sidebar-primary: #1D4ED8;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #27272A;
+  --sidebar-accent-foreground: #F4F4F5;
+  --sidebar-border: #27272A;
+  --sidebar-ring: #3B82F6;
+}
+
+/* Ocean Breeze Palette - Soft blues and teals */
+[data-theme="ocean"] {
+  --background: #f0f9ff;
+  --foreground: #0f172a;
+  --card: #f0f9ff;
+  --card-foreground: #0f172a;
+  --popover: #f0f9ff;
+  --popover-foreground: #0f172a;
+  --primary: #38bdf8;
+  --primary-foreground: #082f49;
+  --secondary: #bae6fd;
+  --secondary-foreground: #0c4a6e;
+  --muted: #e0f2fe;
+  --muted-foreground: #0f172a;
+  --accent: #7dd3fc;
+  --accent-foreground: #082f49;
+  --destructive: #ef4444;
+  --destructive-foreground: #f8fafc;
+  --border: #bae6fd;
+  --input: #bae6fd;
+  --ring: #0ea5e9;
+  --sidebar: #e0f2fe;
+  --sidebar-foreground: #0f172a;
+  --sidebar-primary: #0ea5e9;
+  --sidebar-primary-foreground: #f0f9ff;
+  --sidebar-accent: #bae6fd;
+  --sidebar-accent-foreground: #0c4a6e;
+  --sidebar-border: #7dd3fc;
+  --sidebar-ring: #0284c7;
+}
+
+[data-theme="ocean"][data-mode="dark"] {
+  --background: #0c1114;
+  --foreground: #f1f5f9;
+  --card: #0c1114;
+  --card-foreground: #f1f5f9;
+  --popover: #0c1114;
+  --popover-foreground: #f1f5f9;
+  --primary: #0ea5e9;
+  --primary-foreground: #082f49;
+  --secondary: #075985;
+  --secondary-foreground: #e0f2fe;
+  --muted: #0c4a6e;
+  --muted-foreground: #bae6fd;
+  --accent: #0c4a6e;
+  --accent-foreground: #e0f2fe;
+  --destructive: #7f1d1d;
+  --destructive-foreground: #f8fafc;
+  --border: #0c4a6e;
+  --input: #0c4a6e;
+  --ring: #0ea5e9;
+  --sidebar: #0c2a3a;
+  --sidebar-foreground: #bae6fd;
+  --sidebar-primary: #0284c7;
+  --sidebar-primary-foreground: #f0f9ff;
+  --sidebar-accent: #0c4a6e;
+  --sidebar-accent-foreground: #bae6fd;
+  --sidebar-border: #0ea5e9;
+  --sidebar-ring: #0284c7;
+}
+
+/* Sunset Calm Palette - Warm oranges and pinks */
+[data-theme="sunset"] {
+  --background: #fff7ed;
+  --foreground: #0f172a;
+  --card: #fff7ed;
+  --card-foreground: #0f172a;
+  --popover: #fff7ed;
+  --popover-foreground: #0f172a;
+  --primary: #fb923c;
+  --primary-foreground: #431407;
+  --secondary: #fed7aa;
+  --secondary-foreground: #9a3412;
+  --muted: #ffedd5;
+  --muted-foreground: #0f172a;
+  --accent: #fdba74;
+  --accent-foreground: #9a3412;
+  --destructive: #ef4444;
+  --destructive-foreground: #f8fafc;
+  --border: #fed7aa;
+  --input: #fed7aa;
+  --ring: #f97316;
+  --sidebar: #ffedd5;
+  --sidebar-foreground: #0f172a;
+  --sidebar-primary: #ea580c;
+  --sidebar-primary-foreground: #fff7ed;
+  --sidebar-accent: #fed7aa;
+  --sidebar-accent-foreground: #9a3412;
+  --sidebar-border: #fdba74;
+  --sidebar-ring: #c2410c;
+}
+
+[data-theme="sunset"][data-mode="dark"] {
+  --background: #130c04;
+  --foreground: #fef7ec;
+  --card: #130c04;
+  --card-foreground: #fef7ec;
+  --popover: #130c04;
+  --popover-foreground: #fef7ec;
+  --primary: #f97316;
+  --primary-foreground: #431407;
+  --secondary: #9a3412;
+  --secondary-foreground: #ffedd5;
+  --muted: #7c2d12;
+  --muted-foreground: #fed7aa;
+  --accent: #7c2d12;
+  --accent-foreground: #fed7aa;
+  --destructive: #7f1d1d;
+  --destructive-foreground: #f8fafc;
+  --border: #7c2d12;
+  --input: #7c2d12;
+  --ring: #f97316;
+  --sidebar: #2c1608;
+  --sidebar-foreground: #fed7aa;
+  --sidebar-primary: #c2410c;
+  --sidebar-primary-foreground: #fff7ed;
+  --sidebar-accent: #9a3412;
+  --sidebar-accent-foreground: #fed7aa;
+  --sidebar-border: #f97316;
+  --sidebar-ring: #c2410c;
+}
+
+/* Lavender Dream Palette - Soft purples and lavenders */
+[data-theme="lavender"] {
+  --background: #faf5ff;
+  --foreground: #0f172a;
+  --card: #faf5ff;
+  --card-foreground: #0f172a;
+  --popover: #faf5ff;
+  --popover-foreground: #0f172a;
+  --primary: #c084fc;
+  --primary-foreground: #3b0764;
+  --secondary: #e9d5ff;
+  --secondary-foreground: #5b21b6;
+  --muted: #f3e8ff;
+  --muted-foreground: #0f172a;
+  --accent: #d8b4fe;
+  --accent-foreground: #5b21b6;
+  --destructive: #ef4444;
+  --destructive-foreground: #f8fafc;
+  --border: #e9d5ff;
+  --input: #e9d5ff;
+  --ring: #a855f7;
+  --sidebar: #f3e8ff;
+  --sidebar-foreground: #0f172a;
+  --sidebar-primary: #9333ea;
+  --sidebar-primary-foreground: #faf5ff;
+  --sidebar-accent: #e9d5ff;
+  --sidebar-accent-foreground: #5b21b6;
+  --sidebar-border: #d8b4fe;
+  --sidebar-ring: #7e22ce;
+}
+
+[data-theme="lavender"][data-mode="dark"] {
+  --background: #110c18;
+  --foreground: #f3e8ff;
+  --card: #110c18;
+  --card-foreground: #f3e8ff;
+  --popover: #110c18;
+  --popover-foreground: #f3e8ff;
+  --primary: #a855f7;
+  --primary-foreground: #3b0764;
+  --secondary: #5b21b6;
+  --secondary-foreground: #f3e8ff;
+  --muted: #4c1d95;
+  --muted-foreground: #e9d5ff;
+  --accent: #4c1d95;
+  --accent-foreground: #e9d5ff;
+  --destructive: #7f1d1d;
+  --destructive-foreground: #f8fafc;
+  --border: #4c1d95;
+  --input: #4c1d95;
+  --ring: #a855f7;
+  --sidebar: #1e1b4b;
+  --sidebar-foreground: #e9d5ff;
+  --sidebar-primary: #7e22ce;
+  --sidebar-primary-foreground: #faf5ff;
+  --sidebar-accent: #5b21b6;
+  --sidebar-accent-foreground: #e9d5ff;
+  --sidebar-border: #a855f7;
+  --sidebar-ring: #7e22ce;
 }
 
 /* Add subtle transitions */
@@ -144,6 +399,7 @@
   * {
     @apply border-border transition-colors duration-200;
   }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -157,33 +413,40 @@
 .gentle-shadow {
   @apply shadow-lg shadow-primary/5;
 }
+
 /* Add after your existing styles */
 
 @keyframes float {
+
   0%,
   100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-20px);
   }
 }
 
 @keyframes wave {
+
   0%,
   100% {
     transform: rotate(-5deg);
   }
+
   50% {
     transform: rotate(5deg);
   }
 }
 
 @keyframes scroll {
+
   0%,
   100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(8px);
   }
@@ -211,9 +474,11 @@
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -221,10 +486,12 @@
 
 /* Add to your existing animations */
 @keyframes pulse-gentle {
+
   0%,
   100% {
     opacity: 1;
   }
+
   50% {
     opacity: 0.7;
   }
@@ -269,6 +536,7 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }

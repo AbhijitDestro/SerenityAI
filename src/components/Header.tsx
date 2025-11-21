@@ -1,14 +1,21 @@
+"use client"
+
+import { useState } from "react";
 import Link from "next/link"
-import { HouseHeart } from "lucide-react"
+import { HouseHeart, Menu, MessageCircle, X } from "lucide-react"
 import { ThemeToggle } from "./theme-toggle"
+import { ThemeSelector } from "./theme-selector"
+import { SignInButton } from "./auth/sign-in-button";
+import { Button } from "@/components/ui/button";
 
 const Header = () => {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
      const navItems = [
     { href: "/features", label: "Features" },
     { href: "/about", label: "About Serenity" },
   ];
   return (
-    <div className="w-full fixed top-0 z-50 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
+    <div className="w-full fixed top-0 z-50 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 py-4">
       <div className="absolute inset-0 border-b border-primary/10" />
        <header className="relative max-w-6xl mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
@@ -42,9 +49,45 @@ const Header = () => {
             </nav>
             <div className="flex items-center gap-3">
                 <ThemeToggle />
+                <ThemeSelector />
+                <SignInButton />
+
+                <Button
+                variant="ghost"
+                size="icon"
+                className="md:hidden"
+                onClick={()=> setIsMenuOpen(!isMenuOpen)}>
+                 {isMenuOpen ? (<X className="w-24 h-24" />) : (<Menu className="w-8 h-8" />)}
+                </Button>
             </div>
           </div>
         </div>
+        {/* Mobile menu */}
+        {isMenuOpen && (
+          <div className="md:hidden border-t border-primary/10">
+            <nav className="flex flex-col space-y-1 py-4">
+              {navItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="px-4 py-3 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-primary/5 rounded-md transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              ))}
+              <Button
+                  asChild
+                  className="mt-2 mx-4 gap-2 bg-primary/90 hover:bg-primary"
+                >
+                  <Link href="/dashboard">
+                    <MessageCircle className="w-4 h-4" />
+                    <span>Start Chat</span>
+                  </Link>
+                </Button>
+            </nav>
+          </div>
+        )}
           </header>
     </div>
   )
