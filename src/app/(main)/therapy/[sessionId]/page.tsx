@@ -34,7 +34,7 @@ import { OceanWaves } from "@/components/activities/ocean-waves";
 import { Badge } from "@/components/ui/badge";
 import {
   createChatSession,
-  sendChatMessage,
+  sendMessage,
   getChatHistory,
   ChatMessage,
   getAllChatSessions,
@@ -82,7 +82,7 @@ const glowAnimation = {
     transition: {
       duration: 3,
       repeat: Infinity,
-      ease: "easeInOut",
+      ease: "easeInOut" as const,
     },
   },
 };
@@ -257,7 +257,7 @@ export default function TherapyPage() {
 
       console.log("Sending message to API...");
       // Send message to API
-      const response = await sendChatMessage(sessionId, currentMessage);
+      const response = await sendMessage(sessionId, currentMessage);
       console.log("Raw API response:", response);
 
       // Parse the response if it's a string
@@ -265,35 +265,21 @@ export default function TherapyPage() {
         typeof response === "string" ? JSON.parse(response) : response;
       console.log("Parsed AI response:", aiResponse);
 
-      // Add AI response with metadata
-      const assistantMessage: ChatMessage = {
+      // Add the response to messages
+      const newMessage: ChatMessage = {
         role: "assistant",
-        content:
-          aiResponse.response ||
-          aiResponse.message ||
-          "I'm here to support you. Could you tell me more about what's on your mind?",
+        content: aiResponse.message,
         timestamp: new Date(),
         metadata: {
-          analysis: aiResponse.analysis || {
-            emotionalState: "neutral",
-            riskLevel: 0,
-            themes: [],
-            recommendedApproach: "supportive",
-            progressIndicators: [],
-          },
-          technique: aiResponse.metadata?.technique || "supportive",
-          goal: aiResponse.metadata?.currentGoal || "Provide support",
-          progress: aiResponse.metadata?.progress || {
-            emotionalState: "neutral",
-            riskLevel: 0,
-          },
+          technique: aiResponse.metadata?.technique || undefined,
+          goal: aiResponse.metadata?.goal || undefined,
         },
       };
 
-      console.log("Created assistant message:", assistantMessage);
+      console.log("Created assistant message:", newMessage);
 
       // Add the message immediately
-      setMessages((prev) => [...prev, assistantMessage]);
+      setMessages((prev) => [...prev, newMessage]);
       setIsTyping(false);
       scrollToBottom();
     } catch (error) {

@@ -1,11 +1,23 @@
 
 // Inspired by react-hot-toast library
 import * as React from "react";
-
-import type { ToastActionElement, ToastProps } from "@/components/ui/sonner";
+import { type ToasterProps } from "sonner";
 
 const TOAST_LIMIT = 1;
 const TOAST_REMOVE_DELAY = 5000;
+
+// Define the missing types
+interface ToastProps {
+  id: string;
+  title?: React.ReactNode;
+  description?: React.ReactNode;
+  action?: React.ReactNode;
+  variant?: "default" | "destructive";
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+}
+
+type ToastActionElement = React.ReactNode;
 
 type ToasterToast = ToastProps & {
   id: string;
